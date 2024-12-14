@@ -4,13 +4,13 @@ pipeline {
   agent any
   environment {
     //variables defined here can be used at any stage
-    NEW_VERSION = '1.0.0'
+    NEW_VERSION='1.0.0'
   }
   stages {
     stage('Build') {
       steps {
         echo 'Building Project...'
-        echo 'Building version ${NEW_VERSION}'
+        echo "Building version ${NEW_VERSION}"
         // Here you can define commands for your build
       }
     }
