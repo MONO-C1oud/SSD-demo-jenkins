@@ -15,6 +15,7 @@ pipeline {
         echo 'Building Project...'
         echo "Building version ${NEW_VERSION}"
         // Here you can define commands for your build
+        sh "nvm install"
       }
     }
     stage('Test') {
