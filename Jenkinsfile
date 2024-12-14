@@ -1,16 +1,16 @@
-flag=true
+flag = true
 
 pipeline {
   agent any
   parameters {
-    //these are types of parameters
-    string(name:'VERSION',defaultvalue:'',description:'version to deploy on prod')
-    string(name:'VERSION',choices:['1.1.0','1.2.0'.'1.3.0'],description:'')
-    booleanParam(name:'executeTests',defaultValue:true,description:'')
+    // Fixed parameter syntax
+    string(name: 'VERSION', defaultValue: '', description: 'Version to deploy on prod')
+    choice(name: 'VERSION_CHOICES', choices: ['1.1.0', '1.2.0', '1.3.0'], description: 'Select version')
+    booleanParam(name: 'executeTests', defaultValue: true, description: 'Execute tests?')
   }
   environment {
-    //variables defined here can be used at any stage
-    NEW_VERSION='1.0.0'
+    // Variables defined here can be used at any stage
+    NEW_VERSION = '1.0.0'
   }
   stages {
     stage('Build') {
@@ -34,6 +34,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying....'
+        echo "Deploying version ${params.VERSION}"
         // Here you can define commands for your deployment
       }
     }
@@ -41,11 +42,9 @@ pipeline {
   post {
     // The condition here will execute after the build is done
     always {
-      // This action will happen always regardless of the result of the build
       echo 'Post build condition running'
     }
     failure {
-      // This action will happen only if the build has failed
       echo 'Post action if build failed'
     }
   }
