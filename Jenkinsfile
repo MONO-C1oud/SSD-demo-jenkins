@@ -2,6 +2,9 @@ flag=true
 
 pipeline {
   agent any
+  tools {
+    maven 'Maven'
+  }
   environment {
     //variables defined here can be used at any stage
     NEW_VERSION='1.0.0'
